@@ -9,9 +9,9 @@
     <style>
         :root { --primary: #1b4332; --secondary: #d97706; --bg: #f4f7f6; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--bg); color: #334155; line-height: 1.6; }
+        body { background-color: var(--bg); color: #334155; line-height: 1.5; }
 
-        /* Header & Logo */
+        /* Header */
         header { 
             background: #fff; padding: 1.2rem 5%; text-align: center; 
             box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; 
@@ -23,11 +23,11 @@
         .banner {
             background: linear-gradient(rgba(27, 67, 50, 0.8), rgba(27, 67, 50, 0.8)), 
                         url('https://res.cloudinary.com/dmawwoupq/image/upload/v1771086307/cm0rmt2unkppfi6fq2mx.jpg');
-            background-size: cover; background-position: center; height: 250px;
+            background-size: cover; background-position: center; height: 220px;
             display: flex; align-items: center; justify-content: center; color: white; text-align: center;
         }
 
-        .container { padding: 2.5rem 5%; max-width: 1400px; margin: 0 auto; }
+        .container { padding: 2rem 5%; max-width: 1400px; margin: 0 auto; }
 
         /* Grid Katalog */
         #productGrid { 
@@ -42,7 +42,7 @@
         .product-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
 
         /* Media Slide */
-        .media-box { position: relative; width: 100%; height: 220px; background: #000; overflow: hidden; }
+        .media-box { position: relative; width: 100%; height: 200px; background: #000; overflow: hidden; }
         .media-track { display: flex; height: 100%; transition: transform 0.5s ease-in-out; }
         .slide { min-width: 100%; height: 100%; }
         .slide img, .slide video { width: 100%; height: 100%; object-fit: cover; }
@@ -55,24 +55,23 @@
         }
 
         /* Info Produk */
-        .info-p { padding: 18px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .info-p h3 { font-size: 1rem; color: var(--primary); margin-bottom: 15px; height: 2.6em; overflow: hidden; line-height: 1.4; font-weight: 600; }
+        .info-p { padding: 15px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; }
+        .info-p h3 { font-size: 1rem; color: var(--primary); margin-bottom: 5px; font-weight: 700; text-transform: capitalize; }
+        .deskripsi { font-size: 0.8rem; color: #64748b; margin-bottom: 15px; height: 3em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        
         .btn-wa { 
-            background: #25d366; color: white; padding: 10px; border-radius: 8px; 
+            background: #25d366; color: white; padding: 10px; border-radius: 10px; 
             text-decoration: none; font-weight: 600; font-size: 0.85rem; 
             display: flex; align-items: center; justify-content: center; gap: 8px; 
         }
 
-        footer { background: var(--primary); color: white; text-align: center; padding: 2.5rem 1rem; margin-top: 4rem; font-size: 0.8rem; }
-
-        /* Loading Animation */
-        .loading { text-align: center; grid-column: 1/-1; padding: 50px; font-weight: 600; color: var(--primary); }
+        footer { background: var(--primary); color: white; text-align: center; padding: 2rem 1rem; margin-top: 4rem; font-size: 0.8rem; }
 
         @media (max-width: 600px) {
             #productGrid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
             .media-box { height: 160px !important; }
             .info-p h3 { font-size: 0.85rem !important; }
-            .btn-wa { font-size: 0.75rem; padding: 8px; }
+            .deskripsi { font-size: 0.7rem !important; }
         }
     </style>
 </head>
@@ -80,31 +79,30 @@
 
 <header>
     <a href="#" class="logo">GUDANG<span>RESTO</span></a>
-    <p style="font-size: 0.75rem; color: #64748b; margin-top: 5px;">Pusat Alat Resto Bekas Berkualitas</p>
 </header>
 
 <section class="banner">
     <div>
-        <h1 style="font-size: 1.8rem; letter-spacing: 1px;">KATALOG UNIT READY</h1>
-        <p style="font-size: 0.9rem; opacity: 0.9;">Update Otomatis dari Google Sheets</p>
+        <h1 style="font-size: 1.6rem; letter-spacing: 1px;">KATALOG STOK READY</h1>
+        <p style="font-size: 0.8rem; opacity: 0.9;">Peralatan Dapur Profesional Bekas Berkualitas</p>
     </div>
 </section>
 
 <div class="container">
     <div id="productGrid">
-        <div class="loading">Memuat daftar produk terbaru...</div>
+        <div style="text-align: center; grid-column: 1/-1; padding: 50px;">Memuat data...</div>
     </div>
 </div>
 
 <footer>
-    <p style="font-weight: 600; margin-bottom: 8px;">GUDANGRESTO | WHIRA DIGITAL</p>
-    <p>© 2026 gudangresto.biz.id | Pamulang & Bekasi</p>
+    <p style="font-weight: 600;">GUDANGRESTO | WHIRA DIGITAL</p>
+    <p>© 2026 gudangresto.biz.id</p>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
 <script>
-    // LINK GOOGLE SHEETS VERSI CSV (Sudah disesuaikan dari link Bapak)
+    // LINK GOOGLE SHEETS VERSI CSV
     const sheet_url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQQ-kYQ3uQN_4OT-9JFvyj2dXYHz1FWoW8rV1c1fpf_Q4JNjgwtHVhia05oY9BKM67lQx4FJ8u52sZD/pub?output=csv';
 
     function init() {
@@ -119,9 +117,8 @@
         const data = results.data;
         const grid = document.getElementById('productGrid');
         
-        // Membersihkan grid dan me-render data
         grid.innerHTML = data.map((p, index) => {
-            if(!p.Nama) return ''; // Lewati baris kosong
+            if(!p.NAMA) return ''; // Mencocokkan dengan header NAMA di Sheets Bapak
             const id = 'item-' + index;
             
             return `
@@ -129,20 +126,21 @@
                     <div class="media-box" id="box-${id}">
                         <button class="nav-btn" style="left:8px;" onclick="moveSlide('${id}', -1)">❮</button>
                         <div class="media-track">
-                            <div class="slide"><img src="${p.Foto1 || 'https://via.placeholder.com/400x300'}" alt="F1" loading="lazy"></div>
-                            <div class="slide"><img src="${p.Foto2 || 'https://via.placeholder.com/400x300'}" alt="F2" loading="lazy"></div>
-                            <div class="slide"><img src="${p.Foto3 || 'https://via.placeholder.com/400x300'}" alt="F3" loading="lazy"></div>
+                            <div class="slide"><img src="${p.FOTO1 || 'https://via.placeholder.com/400x300'}" loading="lazy"></div>
+                            <div class="slide"><img src="${p.FOTO2 || 'https://via.placeholder.com/400x300'}" loading="lazy"></div>
+                            <div class="slide"><img src="${p.FOTO3 || 'https://via.placeholder.com/400x300'}" loading="lazy"></div>
                             <div class="slide">
                                 <video muted loop onmouseover="this.play()" onmouseout="this.pause()" style="width:100%; height:100%; object-fit:cover;">
-                                    <source src="${p.Video}" type="video/mp4">
+                                    <source src="${p.VIDIO}" type="video/mp4">
                                 </video>
                             </div>
                         </div>
                         <button class="nav-btn" style="right:8px;" onclick="moveSlide('${id}', 1)">❯</button>
                     </div>
                     <div class="info-p">
-                        <h3>${p.Nama}</h3>
-                        <a href="https://wa.me/6282211494040?text=Halo%20Admin,%20saya%20ingin%20tanya%20harga%20${encodeURIComponent(p.Nama)}" class="btn-wa">
+                        <h3>${p.NAMA}</h3>
+                        <p class="deskripsi">${p.DESKRIPSI || 'Kondisi unit siap pakai.'}</p>
+                        <a href="https://wa.me/6282211494040?text=Halo%20Admin,%20saya%20tertarik%20dengan%20${encodeURIComponent(p.NAMA)}" class="btn-wa">
                             <i class="fab fa-whatsapp"></i> Info Harga
                         </a>
                     </div>
@@ -151,11 +149,10 @@
         }).join('');
     }
 
-    // Fungsi Navigasi Slide
     const currentPos = {};
     window.moveSlide = (id, dir) => {
         if (!currentPos[id]) currentPos[id] = 0;
-        const totalSlides = 4; // 3 Foto + 1 Video
+        const totalSlides = 4;
         currentPos[id] = (currentPos[id] + dir + totalSlides) % totalSlides;
         document.querySelector(`#box-${id} .media-track`).style.transform = `translateX(-${currentPos[id] * 100}%)`;
     };
