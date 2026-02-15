@@ -3,165 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog Premium - GudangResto</title>
+    <title>Katalog Admin - GudangResto</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { 
-            --primary: #1b4332; 
-            --secondary: #d97706; 
-            --accent: #f59e0b;
-            --white: #ffffff;
-            --bg: #f1f5f9;
-        }
-
+        :root { --primary: #1b4332; --secondary: #d97706; --bg: #f4f7f6; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--bg); color: #1e293b; }
+        body { background-color: var(--bg); color: #334155; }
 
-        /* --- Header & Logo --- */
-        header { 
-            background: var(--white); padding: 1rem 5%; text-align: center; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
+        /* --- Form Admin --- */
+        .admin-panel {
+            background: #fff; padding: 20px; margin: 20px auto; max-width: 800px;
+            border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 2px solid var(--primary);
         }
-        .logo { font-weight: 700; font-size: 1.6rem; color: var(--primary); text-decoration: none; text-transform: uppercase; }
-        .logo span { color: var(--secondary); }
-
-        /* --- Banner Area --- */
-        .banner {
-            background: linear-gradient(rgba(27, 67, 50, 0.85), rgba(27, 67, 50, 0.85)), 
-                        url('https://res.cloudinary.com/dmawwoupq/image/upload/f_auto,q_auto/v1771086307/cm0rmt2unkppfi6fq2mx.jpg'); /* Background Banner Otomatis */
-            background-size: cover; background-position: center;
-            height: 350px; display: flex; align-items: center; justify-content: center;
-            text-align: center; color: var(--white); padding: 0 20px;
-        }
-        .banner-content h1 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
-        .banner-content p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
-        .badge { background: var(--secondary); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px; display: inline-block; }
-
-        .container { padding: 3rem 5%; max-width: 1400px; margin: 0 auto; }
-
-        /* --- Grid Katalog --- */
-        .product-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;
+        .admin-panel h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.2rem; }
+        .input-group { margin-bottom: 10px; }
+        .input-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; }
+        .input-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; }
+        .btn-add { 
+            background: var(--primary); color: white; border: none; padding: 12px; 
+            width: 100%; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 10px;
         }
 
-        .product-card {
-            background: var(--white); border-radius: 20px; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #e2e8f0;
-        }
-        .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-
-        /* --- Slide Media --- */
-        .media-box { position: relative; width: 100%; height: 230px; background: #000; overflow: hidden; }
-        .media-track { display: flex; height: 100%; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+        /* --- Katalog Style --- */
+        header { background: #fff; padding: 1rem; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .container { padding: 2rem 5%; max-width: 1400px; margin: 0 auto; }
+        #productGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
+        .product-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+        .media-box { position: relative; width: 100%; height: 200px; background: #000; overflow: hidden; }
+        .media-track { display: flex; height: 100%; transition: transform 0.5s ease; }
         .slide { min-width: 100%; height: 100%; }
         .slide img, .slide video { width: 100%; height: 100%; object-fit: cover; }
-        
-        .nav-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.95); border: none; width: 36px; height: 36px;
-            border-radius: 50%; cursor: pointer; z-index: 5; font-size: 0.8rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); color: var(--primary);
-        }
-        .prev { left: 10px; } .next { right: 10px; }
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; z-index: 5; }
+        .info-p { padding: 15px; text-align: center; }
+        .btn-wa { background: #25d366; color: white; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600; display: block; margin-top: 10px; }
 
-        /* --- Info Produk --- */
-        .product-info { padding: 20px; text-align: left; }
-        .product-info h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 15px; height: 2.6em; overflow: hidden; font-weight: 700; }
-        
-        .btn-price {
-            background: #25d366; color: white; padding: 12px; border-radius: 12px;
-            text-decoration: none; font-weight: 600; font-size: 0.9rem;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            transition: 0.3s; border: none; width: 100%;
-        }
-        .btn-price:hover { background: #128c7e; transform: scale(1.02); }
-
-        footer { background: var(--primary); color: white; text-align: center; padding: 3rem 1rem; margin-top: 4rem; }
-
-        @media (max-width: 600px) {
-            .banner { height: 250px; }
-            .banner-content h1 { font-size: 1.6rem; }
-            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .media-box { height: 170px; }
-            .product-info { padding: 12px; }
-            .product-info h3 { font-size: 0.85rem; margin-bottom: 10px; }
-            .btn-price { font-size: 0.75rem; padding: 10px; }
-        }
+        @media (max-width: 600px) { #productGrid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
     </style>
 </head>
 <body>
 
 <header>
-    <a href="#" class="logo">GUDANG<span>RESTO</span></a>
+    <h1 style="color: var(--primary); font-size: 1.4rem;">GUDANG<span>RESTO</span> ADMIN</h1>
 </header>
 
-<section class="banner">
-    <div class="banner-content">
-        <span class="badge">WHIRA DIGITAL PREZENT</span>
-        <h1>Pusat Unit Ex-Resto Terlengkap</h1>
-        <p>Kualitas Bintang 5, Harga Gudang. Temukan Peralatan Dapur Profesional untuk Bisnis Anda di Pamulang & Bekasi.</p>
-    </div>
-</section>
-
 <div class="container">
-    <div class="product-grid" id="productGrid">
+    <div class="admin-panel">
+        <h2><i class="fas fa-plus-circle"></i> Tambah Produk Baru</h2>
+        <div class="input-group">
+            <label>Nama Produk</label>
+            <input type="text" id="pName" placeholder="Contoh: Meja Stainless 2 Susun">
         </div>
+        <div class="input-group">
+            <label>Link Foto 1 (Cloudinary)</label>
+            <input type="text" id="pImg1" placeholder="Paste link foto pertama">
+        </div>
+        <div class="input-group">
+            <label>Link Foto 2</label>
+            <input type="text" id="pImg2" placeholder="Paste link foto kedua">
+        </div>
+        <div class="input-group">
+            <label>Link Foto 3</label>
+            <input type="text" id="pImg3" placeholder="Paste link foto ketiga">
+        </div>
+        <div class="input-group">
+            <label>Link Video (Opsional)</label>
+            <input type="text" id="pVid" placeholder="Paste link video .mp4">
+        </div>
+        <button class="btn-add" onclick="addNewProduct()">Tambahkan ke Katalog</button>
+    </div>
+
+    <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ddd;">
+
+    <div id="productGrid"></div>
 </div>
 
-<footer>
-    <p style="font-weight: 700; font-size: 1.2rem; margin-bottom: 10px;">GUDANGRESTO</p>
-    <p style="opacity: 0.8;">Hubungi Kami: 0822-1149-4040</p>
-    <p style="opacity: 0.6; font-size: 0.7rem; margin-top: 20px;">&copy; 2026 WHIRA DIGITAL. Semua Hak Dilindungi.</p>
-</footer>
-
 <script>
-    // DATA KATALOG (Ganti link placeholder dengan link Cloudinary Anda)
-    const products = Array.from({ length: 10 }, (_, i) => ({
-        id: `unit-${i+1}`,
-        name: `Kitchen Unit Ex-Resto Premium No. ${i+1}`,
-        images: [
-            'https://via.placeholder.com/500x400?text=Foto+Tampak+Depan',
-            'https://via.placeholder.com/500x400?text=Foto+Detail+1',
-            'https://via.placeholder.com/500x400?text=Foto+Detail+2'
-        ],
-        video: 'https://www.w3schools.com/html/mov_bbb.mp4'
-    }));
-
-    const grid = document.getElementById('productGrid');
+    // Data awal (Produk yang sudah ada)
+    let products = [
+        { id: 'u1', name: 'Sink ice bin upper', images: ['https://res.cloudinary.com/dmawwoupq/image/upload/v1771160937/z4dkavrphtnafuldmnvq.jpg', 'https://res.cloudinary.com/dmawwoupq/image/upload/v1771160944/tpunau7bc2hvoapqkzzo.jpg', 'https://res.cloudinary.com/dmawwoupq/image/upload/v1771160951/qoz6q8rnx45vdf2pjfvj.jpg'], video: '' },
+    ];
 
     function renderProducts() {
+        const grid = document.getElementById('productGrid');
         grid.innerHTML = products.map((p) => `
             <div class="product-card">
                 <div class="media-box" id="box-${p.id}">
-                    <button class="nav-btn prev" onclick="move('${p.id}', -1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn" style="left:5px;" onclick="moveSlide('${p.id}', -1)">❮</button>
                     <div class="media-track">
-                        <div class="slide"><img src="${p.images[0]}" loading="lazy"></div>
-                        <div class="slide"><img src="${p.images[1]}" loading="lazy"></div>
-                        <div class="slide"><img src="${p.images[2]}" loading="lazy"></div>
+                        <div class="slide"><img src="${p.images[0] || 'https://via.placeholder.com/400x300?text=No+Image'}"></div>
+                        <div class="slide"><img src="${p.images[1] || 'https://via.placeholder.com/400x300?text=No+Image'}"></div>
+                        <div class="slide"><img src="${p.images[2] || 'https://via.placeholder.com/400x300?text=No+Image'}"></div>
                         <div class="slide">
-                            <video muted loop onmouseover="this.play()" onmouseout="this.pause()" style="cursor:pointer;">
+                            <video muted loop onmouseover="this.play()" onmouseout="this.pause()">
                                 <source src="${p.video}" type="video/mp4">
                             </video>
                         </div>
                     </div>
-                    <button class="nav-btn next" onclick="move('${p.id}', 1)"><i class="fas fa-chevron-right"></i></button>
+                    <button class="nav-btn" style="right:5px;" onclick="moveSlide('${p.id}', 1)">❯</button>
                 </div>
-                <div class="product-info">
-                    <h3>${p.name}</h3>
-                    <a href="https://wa.me/6282211494040?text=Halo%20Admin,%20saya%20tertarik%20dengan%20${encodeURIComponent(p.name)}" class="btn-price">
-                        <i class="fab fa-whatsapp"></i> Info Harga
-                    </a>
+                <div class="info-p">
+                    <h3 style="font-size: 0.9rem; color: #1b4332; height: 2.5em; overflow: hidden;">${p.name}</h3>
+                    <a href="https://wa.me/6282211494040?text=Tanya%20Harga%20${encodeURIComponent(p.name)}" class="btn-wa">Info Harga</a>
                 </div>
             </div>
         `).join('');
     }
 
+    function addNewProduct() {
+        const name = document.getElementById('pName').value;
+        const img1 = document.getElementById('pImg1').value;
+        const img2 = document.getElementById('pImg2').value;
+        const img3 = document.getElementById('pImg3').value;
+        const vid = document.getElementById('pVid').value;
+
+        if(!name || !img1) return alert("Minimal isi Nama dan Foto ke-1!");
+
+        const newId = 'u' + (products.length + 1);
+        products.unshift({
+            id: newId,
+            name: name,
+            images: [img1, img2, img3],
+            video: vid
+        });
+
+        renderProducts();
+        
+        // Reset Form
+        document.querySelectorAll('.admin-panel input').forEach(i => i.value = '');
+        alert("Produk berhasil ditambahkan ke daftar!");
+    }
+
     const currentPos = {};
-    window.move = (id, dir) => {
+    window.moveSlide = (id, dir) => {
         if (!currentPos[id]) currentPos[id] = 0;
-        const total = 4;
-        currentPos[id] = (currentPos[id] + dir + total) % total;
+        currentPos[id] = (currentPos[id] + dir + 4) % 4;
         document.querySelector(`#box-${id} .media-track`).style.transform = `translateX(-${currentPos[id] * 100}%)`;
     };
 
